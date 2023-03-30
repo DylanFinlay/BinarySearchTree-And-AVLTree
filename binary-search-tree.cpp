@@ -171,6 +171,7 @@ bool BinarySearchTree::remove(DataType val) {
     Node* current = root_;
     Node* prev = nullptr;
 
+    //finding node to delete and its parent
     while(current!=nullptr && current->val != val){
         prev = current;
         if (val>current->val)
@@ -179,6 +180,7 @@ bool BinarySearchTree::remove(DataType val) {
             current = current->left;
     }
 
+    //case 1 if node has no children
     if (current->left == nullptr && current->right == nullptr){
         if(current == root_){
             delete root_;
@@ -196,6 +198,7 @@ bool BinarySearchTree::remove(DataType val) {
 
     }
 
+    //case 2 if node has a left child, no right child
     else if (current->left != nullptr && current->right == nullptr){
         if (current == root_)
             root_ = current->left;
@@ -207,6 +210,7 @@ bool BinarySearchTree::remove(DataType val) {
         delete current;
     }
 
+    //case 3 if node has a right child, no left child
     else if (current->right != nullptr && current->left == nullptr){
         if (current == root_)
             root_ = current->right;
@@ -218,11 +222,12 @@ bool BinarySearchTree::remove(DataType val) {
         delete current;
     }
 
-
+    //case 4 if node has two children
     else if (current->left != nullptr && current->right != nullptr){
         Node* predecessor = current->left;
         Node* PreParent = current;
 
+        //setting predecessor and its parent
         while (predecessor->right != nullptr){
             PreParent = predecessor;
             predecessor = predecessor->right;
@@ -230,6 +235,7 @@ bool BinarySearchTree::remove(DataType val) {
 
         current->val = predecessor->val;
 
+        //if predecessor has no children
         if (predecessor->left == nullptr){
             if (predecessor == current->left)
                 current->left = nullptr;
@@ -237,6 +243,7 @@ bool BinarySearchTree::remove(DataType val) {
                 PreParent->right = nullptr;
         }
 
+        //if predecessor has a left child
         else{
             if (predecessor == current->left)
                 PreParent->left = predecessor->left;
