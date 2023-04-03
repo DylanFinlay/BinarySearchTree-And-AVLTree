@@ -40,9 +40,12 @@ bool AVLTree::leftrotation(Node *unbalanced, Node *unblparent) {
         unblchild = unbalanced->right;
 
     if(unblparent == nullptr){
+        Node** rootTemp = getRootNodeAddress();
+
         unbalanced->right = unblchild->left;
         unblchild->left = unbalanced;
-        BinarySearchTree::root_ = unblchild;
+        *rootTemp = unblchild;
+
         return true;
     }
 
@@ -71,9 +74,12 @@ bool AVLTree::rightrotation(Node *unbalanced, Node *unblparent) {
 
 
     if (unblparent == nullptr){
+        Node** rootTemp = getRootNodeAddress();
+
         unbalanced->left = unblchild->right;
         unblchild->right = unbalanced;
-        BinarySearchTree::root_ = unblchild;
+        *rootTemp = unblchild;
+
         return true;
     }
 
