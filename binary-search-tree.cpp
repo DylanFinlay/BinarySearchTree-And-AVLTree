@@ -21,6 +21,7 @@ int BinarySearchTree::getNodeDepth(Node* n) const {
     else{
         return 1 + std::max(getNodeDepth(n->left), getNodeDepth(n->right));
     }
+
 }
 
 BinarySearchTree::BinarySearchTree() {
