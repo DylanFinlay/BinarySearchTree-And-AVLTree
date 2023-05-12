@@ -1,3 +1,5 @@
+//Functioning implementation of an unbalanced binary search tree
+
 #include "binary-search-tree.h"
 #include <algorithm>
 #include <queue>
